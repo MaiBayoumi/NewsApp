@@ -68,4 +68,7 @@ dependencies {
     implementation("androidx.datastore:datastore-core:1.0.0")
 
     implementation("com.google.dagger:hilt-android:2.50")
+
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.6-rc")
+
 }
