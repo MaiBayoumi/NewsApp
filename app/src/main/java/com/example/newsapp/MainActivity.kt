@@ -16,22 +16,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import com.example.newsapp.domain.usecases.AppEntryUseCases
 import com.example.newsapp.presentation.components.OnBoardingPage
 import com.example.newsapp.presentation.components.OnBoardingScreen
 import com.example.newsapp.ui.theme.NewsAppTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var useCases: AppEntryUseCases
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window,false)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen()
         setContent {
-            NewsAppTheme {
-                Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)){
+            NewsAppTheme(
+                dynamicColor = false
+            ) {
+                Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
                     OnBoardingScreen()
                 }
             }
-
         }
     }
 }
