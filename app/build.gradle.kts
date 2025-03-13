@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.datastore.core.android)
+    implementation(libs.transportation.consumer)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -68,7 +69,11 @@ dependencies {
     implementation("androidx.datastore:datastore-core:1.0.0")
 
     implementation("com.google.dagger:hilt-android:2.50")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.6-rc")
+
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
 
 }
