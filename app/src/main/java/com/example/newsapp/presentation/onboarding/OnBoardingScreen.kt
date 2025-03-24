@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import com.example.newsapp.presentation.Dimens.MediumPadding2
 import com.example.newsapp.presentation.common.NewsButton
 import com.example.newsapp.presentation.common.NewsTextButton
-import com.example.newsapp.presentation.components.OnBoardingPage
-import com.example.newsapp.presentation.components.PagerIndicator
+import com.example.newsapp.presentation.onboarding.components.OnBoardingPage
+import com.example.newsapp.presentation.onboarding.components.PagerIndicator
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
