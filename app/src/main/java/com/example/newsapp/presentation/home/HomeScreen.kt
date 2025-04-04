@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -22,6 +21,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.Article
@@ -33,7 +33,11 @@ import com.example.newsapp.presentation.navgraph.Route
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(articles: LazyPagingItems<Article>, navigate:(String) -> Unit) {
+fun HomeScreen(
+    articles: LazyPagingItems<Article>,
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit
+) {
 
     val titles by remember {
         derivedStateOf {
@@ -72,9 +76,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate:(String) -> Unit) {
             readOnly = true,
             onValueChange = {},
             onSearch = {},
-            onClick = {
-                navigate(Route.SearchScreen.route)
-            }
+            onClick = navigateToSearch
         )
 
         Spacer(modifier = Modifier.height(MediumPadding1))
@@ -84,8 +86,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate:(String) -> Unit) {
                 .fillMaxWidth()
                 .padding(start = MediumPadding1)
                 .basicMarquee(), fontSize = 12.sp,
-            color = colorResource(id = R.color.placeholder),
-
+            color = colorResource(id = R.color.placeholder)
         )
 
         Spacer(modifier = Modifier.height(MediumPadding1))
@@ -93,9 +94,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate:(String) -> Unit) {
         ArticlesList(
             modifier = Modifier.padding(horizontal = MediumPadding1),
             articles = articles,
-            onClick = {
-                //TODO: Navigate to Details Screen
-            }
+            onClick = navigateToDetails
         )
     }
 }
