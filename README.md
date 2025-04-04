@@ -24,4 +24,7 @@ Kabar is a dynamic news application that delivers the latest and most relevant n
 
 ## ScreenShots
 
+![WhatsApp Image 2025-04-05 at 12 49 36 AM-imageonline co-merged](https://github.com/user-attachments/assets/2e337f05-2085-490c-9b52-b152525220db)
+
+![WhatsApp Image 2025-04-05 at 12 48 04 AM (2)-imageonline co-merged](https://github.com/user-attachments/assets/3635abad-6dff-44d4-b8a7-6f9147427b13)
 
