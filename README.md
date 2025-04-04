@@ -12,7 +12,7 @@ Kabar is a dynamic news application that delivers the latest and most relevant n
 
 ## Tools 
 
--JetPack Compose
+- JetPack Compose
 - Follows the MVVM pattern and Clean Architecture
 - Kotlin Coroutines
 - Room Database 
