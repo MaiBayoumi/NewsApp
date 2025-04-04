@@ -13,9 +13,13 @@ import com.example.newsapp.domain.repository.NewsRepository
 import com.example.newsapp.domain.usecases.app_entry.AppEntryUseCases
 import com.example.newsapp.domain.usecases.app_entry.ReadAppEntry
 import com.example.newsapp.domain.usecases.app_entry.SaveAppEntry
+import com.example.newsapp.domain.usecases.news.DeleteArticle
+import com.example.newsapp.domain.usecases.news.GetArticle
+import com.example.newsapp.domain.usecases.news.GetArticles
 import com.example.newsapp.domain.usecases.news.GetNews
 import com.example.newsapp.domain.usecases.news.NewsUseCases
 import com.example.newsapp.domain.usecases.news.SearchNews
+import com.example.newsapp.domain.usecases.news.UpsertArticle
 import com.example.newsapp.util.Constant.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -38,10 +42,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAppEntryUseCases(
-        localUserManger: LocalUserManger
+        localUserManger: LocalUserManger,
     ): AppEntryUseCases = AppEntryUseCases(
         readAppEntry = ReadAppEntry(localUserManger),
-        saveAppEntry = SaveAppEntry(localUserManger)
+        saveAppEntry = SaveAppEntry(localUserManger),
     )
 
     @Provides
@@ -58,19 +62,25 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsRepository(
-        newsApi: NewsApi
+        newsApi: NewsApi,
+        newsDao: NewsDao
     ): NewsRepository {
-        return NewsRepositoryImpl(newsApi)
+        return NewsRepositoryImpl(newsApi,newsDao)
     }
 
     @Provides
     @Singleton
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
+            searchNews = SearchNews(newsRepository),
+            upsertArticle = UpsertArticle(newsDao),
+            deleteArticle = DeleteArticle(newsDao),
+            getArticles = GetArticles(newsDao),
+            getArticle = GetArticle(newsDao)
         )
     }
 
@@ -93,4 +103,5 @@ object AppModule {
     fun provideNewsDao(
         newsDatabase: NewsDatabase
     ): NewsDao = newsDatabase.newsDao
+
 }
