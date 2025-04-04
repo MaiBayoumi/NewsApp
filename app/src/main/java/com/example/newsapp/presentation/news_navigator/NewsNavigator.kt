@@ -21,7 +21,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.Article
+import com.example.newsapp.presentation.bookmark.BookmarkScreen
+import com.example.newsapp.presentation.bookmark.BookmarkViewModel
 import com.example.newsapp.presentation.details.DetailsScreen
+import com.example.newsapp.presentation.details.DetailsViewModel
 import com.example.newsapp.presentation.home.HomeScreen
 import com.example.newsapp.presentation.home.HomeViewModel
 import com.example.newsapp.presentation.navgraph.Route
@@ -120,7 +123,7 @@ fun NewsNavigator() {
                 SearchScreen(
                     state = state,
                     event = viewModel::onEvent,
-                    navigateToDetails = {article ->
+                    navigateToDetails = { article ->
                         navigateToDetails(
                             navController = navController,
                             article = article
@@ -129,18 +132,31 @@ fun NewsNavigator() {
                 )
             }
             composable(route = Route.DetailsScreen.route) {
+                val viewModel: DetailsViewModel = hiltViewModel()
                 navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
                     ?.let { article ->
                         DetailsScreen(
                             article = article,
-                            event = {},
-                            navigateUp = { navController.navigateUp() }
+                            event = viewModel::onEvent,
+                            navigateUp = { navController.navigateUp() },
+                            sideEffect = viewModel.sideEffect
                         )
                     }
 
             }
             composable(route = Route.BookmarkScreen.route) {
-
+                val viewModel: BookmarkViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
+                BookmarkScreen(
+                    state = state,
+                    navigateToDetails = { article ->
+                        navigateToDetails(
+                            navController = navController,
+                            article = article
+                        )
+                    }
+                )
             }
         }
     }
@@ -168,7 +184,7 @@ private fun navigateToTab(navController: NavController, route: String) {
     }
 }
 
-private fun navigateToDetails(navController: NavController, article: Article){
+private fun navigateToDetails(navController: NavController, article: Article) {
     navController.currentBackStackEntry?.savedStateHandle?.set("article", article)
     navController.navigate(
         route = Route.DetailsScreen.route
