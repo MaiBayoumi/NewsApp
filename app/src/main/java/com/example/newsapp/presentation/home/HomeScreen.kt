@@ -21,14 +21,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.Article
 import com.example.newsapp.presentation.Dimens.MediumPadding1
 import com.example.newsapp.presentation.common.ArticlesList
 import com.example.newsapp.presentation.common.SearchBar
-import com.example.newsapp.presentation.navgraph.Route
 
 
 @OptIn(ExperimentalFoundationApi::class)

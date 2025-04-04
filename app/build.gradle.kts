@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android") // Hilt plugin
     id("kotlin-kapt") // Apply the Kotlin annotation processing tool (kapt)
+    id ("kotlin-parcelize")
+
 }
 
 android {
@@ -92,6 +94,10 @@ dependencies {
 
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0" )// For JSON conversion
+
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 
 
 
